@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>سوق دي زد</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">سوق<em>دي زد</em></span>
+    </div>
+    <button id="btn-keys" class="icon-btn" title="حسابي">👤</button>
+  </header>
+
+  <main id="app">
+
+    <!-- شاشة التصفح -->
+    <section id="view-browse" class="view active">
+      <div class="filters">
+        <input id="search-input" type="search" placeholder="ابحث عن سلعة..." />
+        <select id="filter-wilaya">
+          <option value="">كل الولايات</option>
+        </select>
+        <select id="filter-category">
+          <option value="">كل الفئات</option>
+        </select>
+      </div>
+      <div id="status-line" class="status-line"></div>
+      <ul id="listing-list" class="listing-list"></ul>
+    </section>
+
+    <!-- شاشة نشر إعلان -->
+    <section id="view-post" class="view">
+      <h2 class="section-title">إعلان جديد</h2>
+      <form id="post-form">
+        <label>عنوان الإعلان
+          <input required id="f-title" type="text" maxlength="120" placeholder="مثال: آيفون 12 بحالة ممتازة" />
+        </label>
+        <label>الوصف
+          <textarea required id="f-desc" rows="5" placeholder="اكتب تفاصيل السلعة، الحالة، سبب البيع..."></textarea>
+        </label>
+        <div class="row">
+          <label>السعر (دج)
+            <input required id="f-price" type="number" min="0" step="1" placeholder="15000" />
+          </label>
+          <label>الفئة
+            <select id="f-category">
+              <option value="electronics">إلكترونيات</option>
+              <option value="vehicles">سيارات ومركبات</option>
+              <option value="realestate">عقارات</option>
+              <option value="fashion">ملابس وأزياء</option>
+              <option value="home">أثاث ومنزل</option>
+              <option value="jobs">عروض عمل</option>
+              <option value="services">خدمات</option>
+              <option value="other">أخرى</option>
+            </select>
+          </label>
+        </div>
+        <label>الولاية
+          <select id="f-wilaya"></select>
+        </label>
+        <label>رابط صورة (اختياري)
+          <input id="f-image" type="url" placeholder="https://..." />
+        </label>
+        <label>رقم الهاتف أو واتساب (اختياري، يظهر للمشترين)
+          <input id="f-phone" type="tel" placeholder="0555 xx xx xx" />
+        </label>
+        <button type="submit" class="btn-primary">نشر الإعلان</button>
+        <p id="post-status" class="status-line"></p>
+      </form>
+    </section>
+
+    <!-- شاشة إعلاناتي -->
+    <section id="view-mine" class="view">
+      <h2 class="section-title">إعلاناتي</h2>
+      <div id="status-line-mine" class="status-line"></div>
+      <ul id="listing-list-mine" class="listing-list"></ul>
+    </section>
+
+    <!-- شاشة الإعدادات / الحساب -->
+    <section id="view-account" class="view">
+      <h2 class="section-title">حسابي على الشبكة</h2>
+      <p class="hint">
+        هذا التطبيق لا يملك أي سيرفر أو قاعدة بيانات مركزية: هويتك ومفتاحك
+        الخاص محفوظان فقط على هاتفك، وإعلاناتك تُنشر مباشرة على شبكة Nostr.
+        احتفظ بالمفتاح السري في مكان آمن، فمن يملكه يتحكم بحسابك بالكامل.
+      </p>
+      <label>معرّفك العام (npub) — شاركه مع الآخرين
+        <input id="acct-npub" type="text" readonly />
+      </label>
+      <label>مفتاحك السري (nsec) — لا تشاركه مع أحد
+        <input id="acct-nsec" type="password" readonly />
+      </label>
+      <div class="account-actions">
+        <button id="btn-reveal-nsec" class="btn-secondary">إظهار المفتاح السري</button>
+        <button id="btn-copy-npub" class="btn-secondary">نسخ المعرّف العام</button>
+      </div>
+      <hr />
+      <h3 class="section-title small">استيراد حساب موجود</h3>
+      <label>الصق مفتاحك السري (nsec)
+        <input id="import-nsec" type="password" placeholder="nsec1..." />
+      </label>
+      <button id="btn-import" class="btn-secondary">استيراد</button>
+      <p id="account-status" class="status-line"></p>
+      <hr />
+      <h3 class="section-title small">الخوادم (Relays)</h3>
+      <ul id="relay-list" class="relay-list"></ul>
+    </section>
+
+  </main>
+
+  <nav class="tabbar">
+    <button class="tab active" data-view="view-browse"><span>🔎</span>تصفح</button>
+    <button class="tab" data-view="view-post"><span>➕</span>نشر</button>
+    <button class="tab" data-view="view-mine"><span>🗂</span>إعلاناتي</button>
+    <button class="tab" data-view="view-account"><span>⚙️</span>الحساب</button>
+  </nav>
+
+  <div id="detail-overlay" class="overlay hidden">
+    <div class="detail-sheet">
+      <button id="detail-close" class="icon-btn close-btn">✕</button>
+      <div id="detail-content"></div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

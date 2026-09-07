@@ -1,0 +1,148 @@
+:root{
+  --paper:#FAF7F2;
+  --ink:#1B2A2E;
+  --accent:#C1502E;
+  --teal:#2F6F5E;
+  --muted:#8C8577;
+  --line:#E4DCCB;
+  --danger:#A23B3B;
+}
+
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'IBM Plex Sans Arabic', sans-serif;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+
+h1,h2,h3,.brand-mark{font-family:'Amiri', serif;}
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 18px;
+  border-bottom:1px solid var(--line);
+  background:var(--paper);
+  flex:0 0 auto;
+}
+.brand-mark{font-size:22px;font-weight:700;color:var(--ink);}
+.brand-mark em{font-style:normal;color:var(--accent);}
+.icon-btn{
+  background:none;border:1px solid var(--line);border-radius:8px;
+  width:38px;height:38px;font-size:18px;cursor:pointer;
+}
+
+#app{flex:1 1 auto;overflow-y:auto;padding:14px 16px 90px;}
+.view{display:none;}
+.view.active{display:block;}
+
+.section-title{font-size:19px;margin:4px 0 14px;}
+.section-title.small{font-size:16px;margin-top:22px;}
+
+.filters{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+.filters input[type="search"]{flex:1 1 100%;}
+.filters select{flex:1 1 45%;}
+
+input,select,textarea{
+  width:100%;
+  font-family:inherit;
+  font-size:15px;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#fff;
+  color:var(--ink);
+}
+label{display:block;margin-bottom:12px;font-size:14px;color:var(--muted);}
+label input,label select,label textarea{margin-top:6px;color:var(--ink);}
+.row{display:flex;gap:10px;}
+.row label{flex:1;}
+
+.btn-primary{
+  width:100%;padding:13px;border:none;border-radius:8px;
+  background:var(--accent);color:#fff;font-size:16px;font-weight:600;
+  cursor:pointer;
+}
+.btn-primary:active{opacity:.85;}
+.btn-secondary{
+  padding:10px 14px;border:1px solid var(--ink);border-radius:8px;
+  background:transparent;color:var(--ink);font-size:14px;cursor:pointer;
+}
+
+.status-line{min-height:18px;font-size:13px;color:var(--muted);margin:6px 0 10px;}
+.status-line.error{color:var(--danger);}
+.status-line.ok{color:var(--teal);}
+
+.hint{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:16px;}
+
+hr{border:none;border-top:1px solid var(--line);margin:20px 0;}
+
+/* قائمة الإعلانات بشكل صحيفة إعلانات مبوبة */
+.listing-list{list-style:none;margin:0;padding:0;}
+.listing-item{
+  display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);
+  cursor:pointer;
+}
+.listing-thumb{
+  width:64px;height:64px;border-radius:6px;object-fit:cover;
+  background:#EFE9DC;flex:0 0 auto;border:1px solid var(--line);
+}
+.listing-thumb.placeholder{
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:22px;
+}
+.listing-meta{flex:1;min-width:0;}
+.listing-title{font-weight:600;font-size:15px;margin:0 0 4px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.listing-sub{font-size:13px;color:var(--muted);margin:0 0 4px;}
+.listing-price{color:var(--accent);font-weight:700;font-size:15px;}
+
+.relay-list{list-style:none;padding:0;margin:0;font-size:13px;}
+.relay-list li{
+  display:flex;justify-content:space-between;padding:8px 0;
+  border-bottom:1px solid var(--line);color:var(--muted);
+}
+.relay-list li .ok-dot{color:var(--teal);}
+.relay-list li .bad-dot{color:var(--danger);}
+
+.account-actions{display:flex;gap:8px;margin-bottom:10px;}
+
+.tabbar{
+  flex:0 0 auto;
+  display:flex;
+  border-top:1px solid var(--line);
+  background:#fff;
+}
+.tab{
+  flex:1;border:none;background:none;padding:10px 0 8px;
+  font-family:inherit;font-size:12px;color:var(--muted);
+  display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;
+}
+.tab span{font-size:19px;}
+.tab.active{color:var(--accent);}
+
+.overlay{
+  position:fixed;inset:0;background:rgba(27,42,46,.55);
+  display:flex;align-items:flex-end;z-index:50;
+}
+.overlay.hidden{display:none;}
+.detail-sheet{
+  background:var(--paper);width:100%;max-height:88vh;overflow-y:auto;
+  border-radius:16px 16px 0 0;padding:20px;position:relative;
+}
+.close-btn{position:absolute;top:12px;left:12px;}
+.detail-img{width:100%;border-radius:10px;margin-bottom:14px;background:#EFE9DC;
+  max-height:260px;object-fit:cover;}
+.detail-title{font-size:20px;margin:0 0 6px;}
+.detail-price{color:var(--accent);font-weight:700;font-size:19px;margin-bottom:10px;}
+.detail-tags{color:var(--muted);font-size:13px;margin-bottom:14px;}
+.detail-desc{font-size:15px;line-height:1.8;margin-bottom:18px;white-space:pre-wrap;}
+.detail-seller{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;}
+
+.empty-state{text-align:center;color:var(--muted);padding:40px 10px;font-size:14px;}
